@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>acrobat</id>
+    <version>11.0.10</version>
+    <title>Acrobat Standard and Pro</title>
+    <authors>Oracle</authors>
+    <licenseUrl>http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/legal/licenses-terms/pdf/Acrobat_%2011.0.pdf</licenseUrl>
+    <projectUrl>http://www.adobe.com</projectUrl>
+    <iconUrl>http://cdn.rawgit.com/chocolatey/chocolatey-coreteampackages/50fd97744110dcbce1acde889c0870599c9d5584/icons/java.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+This Acrobat package does not install Acrobat on computers. It just updates Acrobat Standard and Pro to the latest version. 
+    </description>
+    <tags>Acrobat Standard and Pro</tags>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
+<!-- “UTF-8” test -->
