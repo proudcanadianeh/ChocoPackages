@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>jre8</id>
-    <version>8.0.66</version>
-    <title>Java SE Runtime Environment</title>
+    <id>javaruntime</id>
+    <version>8.0.60</version>
+    <title>Java Runtime (JRE)</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
     <licenseUrl>http://www.oracle.com/technetwork/java/javase/terms/license/index.html</licenseUrl>
@@ -14,14 +14,11 @@
 
 ### Note
 
-This package installs the Java version offered at https://www.java.com. It also sets `SPONSORS=0` ([see docs](http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jre-installer-options.html#running)).
-
-If you wish to install to an alternate directory, use the 32dir and/or the 64dir parameter. Example: choco install jre8 -PackageParameters "/32dir:c:\path\to\install /64dir:c:\path\to\64" -y
-If you wish to only install the 32-bit version of Java use the /exclude parameter. The switch to exclude 32-bit is /exclude:32 and to exclude 64-bit /exclude:64 
-For example: choco install jre8 -PackageParameters "/exclude:64" -y
-
-This package can install 32-bit, 64-bit, or both versions.</description>
+This is just a metapackage for the latest JRE (currenly JRE 8). Have a look at the [jre8 package](/packages/jre8) for more details.</description>
     <releaseNotes />
     <tags>java runtime environment</tags>
+    <dependencies>
+      <dependency id="jre8" version="8.0.60.20150902" />
+    </dependencies>
   </metadata>
 </package>
