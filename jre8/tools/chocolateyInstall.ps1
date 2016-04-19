@@ -6,8 +6,6 @@ $arguments = @{}
   $packageParameters = $env:chocolateyPackageParameters
 
   # Default value
-  $32dir = $null
-  $64dir = $null
   $exclude = $null
 
   # Now parse the packageParameters using good old regular expression
@@ -29,18 +27,6 @@ $arguments = @{}
           Throw "Package Parameters were found but were invalid (REGEX Failure)"
       }
 
-      if ($arguments.ContainsKey("32dir")) {
-          Write-Host "32dir Argument Found"
-          $32dir = $arguments["32dir"]
-          $32dir = "INSTALLDIR=`"$32dir`""
-      }
-
-      if ($arguments.ContainsKey("64dir")) {
-          Write-Host "64dir Argument Found"
-          $64dir = $arguments["64dir"]
-          $64dir = "INSTALLDIR=`"$64dir`""
-      }
-
       if($arguments.ContainsKey("exclude")) {
           Write-Host "exclude Argument Found"
           $exclude = $arguments["exclude"]
@@ -53,44 +39,21 @@ $arguments = @{}
   $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
   # Import function to test if JRE in the same version is already installed
   Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
-
+  
   $packageName = 'jre8'
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=113217'
-  $url64 = 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=113219'
-  $oldVersion = '8.0.650.17'
-  $version = '8.0.660.18'
+  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207229'
+  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207231'
+  $oldVersion = '8.0.730.2'
+  $version = '8.0.770.3'
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s REBOOT=Suppress SPONSORS=0 $32dir"
-  $installArgs64 = "/s REBOOT=Suppress SPONSORS=0 $64dir"
+  $installArgs = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $32dir"
+  $installArgs64 = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $64dir"
   $osBitness = Get-ProcessorBits
-  
-  # If both 32- and 64-bit versions are installed, it adds only the folder
-  # of the 64-bit version to the env variables  
-    
-  if ($osBitness -eq 64 -and $arguments["64dir"]) {
-     $javaHome = $arguments["64dir"]
-
-  }elseif ($osBitness -eq 32 -and $arguments["32dir"]) {
-
-     $javaHome = $arguments["32dir"]
-
-  }elseif ($exclude -eq "64") {
-     
-     $javaHome = Join-Path ${env:ProgramFiles(x86)} "Java\$homepath"
-
-  }else{
-
-     $javaHome = Join-Path $env:ProgramFiles "Java\$homepath"
-
-  }
-
-  # Create variable for environment path
-  $jreForPathVariable = Join-Path $javaHome 'bin'
-
+   
+  Write-Output "Searching if new version exists..."
   $thisJreInstalledHash = thisJreInstalled($version)
-  $oldJreInstalledHash = thisJreInstalled($oldVersion)
 
   # This is the code for both javaruntime and javaruntime-platformspecific packages.
   # If the package is javaruntime-platformspecific, only install the jre version
@@ -144,6 +107,9 @@ $arguments = @{}
     }
   }
   #Uninstalls the previous version of Java if either version exists
+  Write-Output "Searching if the previous version exists..."
+  $oldJreInstalledHash = thisJreInstalled($oldVersion)
+
   if($oldJreInstalledHash[0]) 
   {
      Write-Warning "Uninstalling JRE version $oldVersion 32bit"
@@ -156,16 +122,6 @@ $arguments = @{}
      $64 = $oldJreInstalledHash[1].IdentifyingNumber
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
-  # Only set the entry for the PATH variable and the JAVA_HOME env variable
-  # if the same version of JRE was not already installed (32- or 64-bit separately)
-  if (!($thisJreInstalledHash[0]) -or !($thisJreInstalledHash[1])) {
-
-    Install-ChocolateyPath $jreForPathVariable 'Machine'
-    Start-ChocolateyProcessAsAdmin @"
-[Environment]::SetEnvironmentVariable('JAVA_HOME', '$javaHome', 'Machine')
-"@
-  }
-
 } catch {
   #Write-ChocolateyFailure $packageName $($_.Exception.Message)
   throw
