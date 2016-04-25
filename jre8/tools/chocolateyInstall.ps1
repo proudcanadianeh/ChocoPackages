@@ -42,10 +42,10 @@ $arguments = @{}
   
   $packageName = 'jre8'
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207229'
-  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207231'
-  $oldVersion = '8.0.730.2'
-  $version = '8.0.770.3'
+  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207773'
+  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207775'
+  $oldVersion = '8.0.770.3'
+  $version = '8.0.910.14'
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
   $installArgs = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $32dir"
