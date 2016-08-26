@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>jre8</id>
-    <version>8.0.77</version>
+    <version>8.0.101.20160825</version>
     <title>Java SE Runtime Environment</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
@@ -23,5 +23,6 @@ This package no longer manually adds an environment variable.
 This package can install 32-bit, 64-bit, or both versions.</description>
     <releaseNotes />
     <tags>java runtime environment</tags>
+	<packageSourceUrl>https://github.com/proudcanadianeh/ChocoPackages/tree/master/jre8</packageSourceUrl>
   </metadata>
 </package>

@@ -5,7 +5,7 @@ $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
 Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
 
 [string]$packageName="Javaruntime"
-$version = '8.0.910.14'
+$version = '8.0.1010.13'
 $thisJreInstalledHash = thisJreInstalled($version)
 
 <#
