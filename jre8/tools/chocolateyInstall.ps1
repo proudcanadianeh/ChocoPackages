@@ -41,11 +41,17 @@ $arguments = @{}
   Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
   
   $packageName = 'jre8'
+  # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207773'
-  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207775'
-  $oldVersion = '8.0.770.3'
-  $version = '8.0.910.14'
+  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=211997'
+  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=211999'
+  $oldVersion = '8.0.910.14'
+  $version = '8.0.1010.13'
+  $checksum       = '8FAC3FBB9E854BCEE12049430E9EF67188C6389B46C67120E873CDF173B3C3B9'
+  $checksumType   = 'sha256'
+  $checksum64     = 'CF92B0DC495EB57D1DA1A63EB798CC002A4014A0E938CB7ED17519B6F52BA4F7'
+  $checksumType64 = 'sha256'
+  #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
   $installArgs = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $32dir"
@@ -63,7 +69,7 @@ $arguments = @{}
     if (($thisJreInstalledHash[0]) -or ($thisJreInstalledHash[1])) {
       Write-Output "Java Runtime Environment $version is already installed. Skipping download and installation to avoid 1603 errors."
     } else {
-      Install-ChocolateyPackage $packageName $installerType $installArgs $url $url64
+      Install-ChocolateyPackage $packageName $installerType $installArgs $url $url64 -checksum $checksum -checksumType $checksumType -checksum64 $checksum64 -checksumType64 $checkSumType64
     }
 
   } else {
@@ -78,7 +84,7 @@ $arguments = @{}
     } 
     elseif ($exclude -ne "32") 
     {
-      Install-ChocolateyPackage $packageName $installerType $installArgs $url
+      Install-ChocolateyPackage $packageName $installerType $installArgs $url -checksum $checksum -checksumType $checksumType
     } 
     else 
     {
@@ -98,7 +104,7 @@ $arguments = @{}
         # Here $url64 is used twice to obtain the correct message from Chocolatey
         # that it installed the 64-bit version, otherwise it would display 32-bit,
         # regardless of the actual bitness of the software.
-        Install-ChocolateyPackage $packageName $installerType $installArgs64 $url64 $url64
+        Install-ChocolateyPackage $packageName $installerType $installArgs64 $url64 $url64 -checksum $checksum64 -checksumType $checkSumType64 -checksum64 $checksum64 -checksumType64 $checkSumType64
       } 
       else 
       {
