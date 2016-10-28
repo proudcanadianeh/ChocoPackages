@@ -1,9 +1,9 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>javaruntime</id>
-    <version>8.0.101</version>
-    <title>Java Runtime (JRE)</title>
+    <id>jre8</id>
+    <version>8.0.101.20160917</version>
+    <title>Java SE Runtime Environment</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
     <licenseUrl>http://www.oracle.com/technetwork/java/javase/terms/license/index.html</licenseUrl>
@@ -14,11 +14,14 @@
 
 ### Note
 
-This is just a metapackage for the latest JRE (currenly JRE 8). Have a look at the [jre8 package](/packages/jre8) for more details.</description>
+This package installs the Java version offered at https://www.java.com. It also sets `SPONSORS=0` and uninstalls previous versions of Java with REMOVEOUTOFDATEJRES=1 ([see docs](http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jre-installer-options.html#running)).
+
+If you wish to only install the 32-bit version of Java use the /exclude parameter. The switch to exclude 32-bit is /exclude:32 and to exclude 64-bit /exclude:64 
+For example: choco install jre8 -PackageParameters "/exclude:64" -y
+This package no longer manually adds an environment variable. 
+
+This package can install 32-bit, 64-bit, or both versions.</description>
     <releaseNotes />
     <tags>java runtime environment</tags>
-    <dependencies>
-      <dependency id="jre8" version="8.0.101.20160917" />
-    </dependencies>
   </metadata>
 </package>
