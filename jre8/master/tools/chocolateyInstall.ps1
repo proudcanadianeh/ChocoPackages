@@ -43,17 +43,17 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=211997'
-  $checksum32 = '8FAC3FBB9E854BCEE12049430E9EF67188C6389B46C67120E873CDF173B3C3B9'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=211999'
-  $checksum64 = 'CF92B0DC495EB57D1DA1A63EB798CC002A4014A0E938CB7ED17519B6F52BA4F7'
-  $oldVersion = '8.0.910.14'
-  $version = '8.0.1010.13'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=218831_e9e7ea248e2c4826b92b3f075a80e441'
+  $checksum32 = '13D5ED94FE40D9403D5D25B1EF46593DC7F96993DF735EA36A32DB3DC8ED8EC7'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=218833_e9e7ea248e2c4826b92b3f075a80e441'
+  $checksum64 = '6741ACEFEB3845964534B3821D459B95C7DFA079F104C5041D1F95D3B6B7A502'
+  $oldVersion = '8.0.1110.14'
+  $version = '8.0.1210.13'
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $32dir"
-  $installArgs64 = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $64dir"
+  $installArgs = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
+  $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
   $osBitness = Get-ProcessorBits
    
   Write-Output "Searching if new version exists..."
