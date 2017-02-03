@@ -99,10 +99,7 @@ $arguments = @{}
       } 
       elseif ($exclude -ne "64") 
       {
-        # Here $url64 is used twice to obtain the correct message from Chocolatey
-        # that it installed the 64-bit version, otherwise it would display 32-bit,
-        # regardless of the actual bitness of the software.
-        Install-ChocolateyPackage $packageName $installerType $installArgs64 $url64 $url64 -checksum64 $checksum64 -checksumtype64 'sha256'
+        Install-ChocolateyPackage $packageName $installerType $installArgs64 -url64bit $url64 -checksum64 $checksum64 -checksumtype64 'sha256'
       } 
       else 
       {
