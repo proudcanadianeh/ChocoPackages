@@ -1,4 +1,4 @@
-﻿try {
+try {
 
 $arguments = @{}
 
@@ -38,22 +38,23 @@ $arguments = @{}
 
   $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
   # Import function to test if JRE in the same version is already installed
-  Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
+  . (Join-Path $scriptDir 'thisJreInstalled.ps1')
+  . (Join-Path $scriptDir 'packageArgs.ps1')
   
-  $packageName = 'jre8'
+  $packageName = $packageArgs.packageName
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=220313_d54c1d3a095b4ff2b6607d096fa80163'
-  $checksum32 = '73bf9257e2f4ca73318d3c23181cbe1e93665bf13fda7b956252a70b975bcf8b'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=220315_d54c1d3a095b4ff2b6607d096fa80163'
-  $checksum64 = '5083590a30bf069e947dce8968221af21b39836fe013b111de70d6107b577cd3'
-  $oldVersion = '8.0.1210.13'
-  $version = '8.0.1310.11'
+  $url = $packageArgs.url
+  $checksum32 = $packageArgs.checksum
+  $url64 = $packageArgs.url64bit
+  $checksum64 = $packageArgs.checksum64
+  $oldVersion = $packageArgs.oldVersion
+  $version = $packageArgs.version
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
-  $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
+  $installArgs = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $32dir"
+  $installArgs64 = "/s REBOOT=0 SPONSORS=0 REMOVEOUTOFDATEJRES=1 $64dir"
   $osBitness = Get-ProcessorBits
    
   Write-Output "Searching if new version exists..."
