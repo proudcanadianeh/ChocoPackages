@@ -1,11 +1,12 @@
-﻿Write-Debug ("Starting " + $MyInvocation.MyCommand.Definition)
+Write-Debug ("Starting " + $MyInvocation.MyCommand.Definition)
 
 $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
 # Import function to test if JRE in the same version is already installed
-Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
+#Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
+  . (Join-Path $scriptDir 'thisJreInstalled.ps1')
 
 [string]$packageName="Javaruntime"
-$version = '8.0.1310.11'
+$version = '8.0.1010.13'
 $thisJreInstalledHash = thisJreInstalled($version)
 
 <#
