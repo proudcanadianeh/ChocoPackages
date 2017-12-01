@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Logicity</id>
+    <version>1.7.0018.1</version>
+    <title>Logicity</title>
+    <authors>Saberlogic</authors>
+    <owners>Myself</owners>
+    <licenseUrl>http://www.logicitysuite.com/terms-conditions.html</licenseUrl>
+    <projectUrl>http://www.logicitysuite.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Logicity Crystal Report viewer</description>
+    <summary>Logicity Viewer</summary>
+    <tags>crystal reports viewer</tags>
+  </metadata>
+</package>
