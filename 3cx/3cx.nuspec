@@ -5,14 +5,14 @@
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>3cx</id>
     <version>15.5</version>
-    <!-- <packageSourceUrl>Where is this Chocolatey package located (think GitHub)? packageSourceUrl is highly recommended for the community feed</packageSourceUrl>-->
+    <packageSourceUrl>https://github.com/proudcanadianeh/ChocoPackages/tree/master/3cx</packageSourceUrl>
    
     <owners>Myself</owners>
     <!-- ============================== -->
 
     <!-- == SOFTWARE SPECIFIC SECTION == -->
     <!-- This section is about the software itself -->
-    <title>3cx (Install)</title>
+    <title>3CX Client for Windows</title>
     <authors>3CX</authors>
     <!-- projectUrl is required for the community feed -->
     <projectUrl>https://www.3cx.com/phone-system/3cxphone/</projectUrl>
@@ -23,9 +23,9 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>-->
     <!--<projectSourceUrl>Software Source Location - is the software FOSS somewhere? Link to it with this</projectSourceUrl>-->
     <docsUrl>https://www.3cx.com/phone-system/windows-mac-softphone/</docsUrl>
-    <tags>3cx SPACE_SEPARATED</tags>
+    <tags>3cx</tags>
     <summary>3CX Windows Client</summary>
-    <description>The Windows installer for the 3CX Client</description>
+    <description>The Windows installer for the 3CX Client. I would recommend avoiding installing on the actual 3CX server.</description>
     <!-- <releaseNotes>__REPLACE_OR_REMOVE__MarkDown_Okay</releaseNotes> -->
     <!-- =============================== -->      
 
