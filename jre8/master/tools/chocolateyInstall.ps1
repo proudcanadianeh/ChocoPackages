@@ -43,12 +43,12 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=227550_e758a0de34e24606bca991d704f6dcbf'
-  $checksum32 = '990FA41BD7A66C0402A6EDE43D51983CA0AC5F74B212FDD9F4AFE366CDE7A28D'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=227552_e758a0de34e24606bca991d704f6dcbf'
-  $checksum64 = '4378D712C510930D066BFA256B24E07DFEA5ED31AA514AFB7C7DD72FCCE9BB68'
-  $oldVersion = '8.0.1440.1'
-  $version = '8.0.1510.12'
+  $url = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=230540_2f38c3b165be4555a1fa6e98c45e0808'
+  $checksum32 = '9D4AB1C5EFF210FD165A1ACA33734DA82C6BAC9437BD8F20637E68460F3E9008'
+  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=230542_2f38c3b165be4555a1fa6e98c45e0808'
+  $checksum64 = '59C02EB80ACFAEEAF3728C3841440C68EA9E3B4D5E735A7A863F6E2492760B5D'
+  $oldVersion = '8.0.1510.12'
+  $version = '8.0.1610'
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
