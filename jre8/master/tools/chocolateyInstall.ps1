@@ -47,7 +47,7 @@ $arguments = @{}
   $checksum32 = 'ECAA6BF5DC3C02D5F3A93382268D44B1540F322C508E88E679CA17F8DCC906D7'
   $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=233172_512cd62ec5174c3487ac17c61aaa89e8'
   $checksum64 = 'D5256B3D1A6DA959EA98EA2A2BE3A05A7DF9D1A5CD75DB3930F935AB71CE43B8'
-  $oldVersion = '8.0.1610'
+  $oldVersion = '8.0.1610.12'
   $version = '8.0.1710.11'
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
