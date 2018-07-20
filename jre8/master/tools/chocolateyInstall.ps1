@@ -45,7 +45,7 @@ $arguments = @{}
   # Find download URLs at http://www.java.com/en/download/manual.jsp
   $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=234472_96a7b8442fe848ef90c96a2fad6ed6d1'
   $checksum32 = '9E5E6A1C5D26D93454751E65486F728233FDAC3B50FF763F6709FB87DD960CE5'
-  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=234474_96a7b8442fe848ef90c96a2fad6ed6d1'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=234474_96a7b8442fe848ef90c96a2fad6ed6d1'
   $checksum64 = 'CD2F756133D59525869ACB605A54EFD132FCD7EAF53E2EC040D92EF40A2EA60A'
   $oldVersion = '8.0.1710.11'
   $version = '8.0.1810.13'
@@ -112,7 +112,7 @@ $arguments = @{}
   if($checkoldreg64 -ne $null)
   {
      Write-Warning "Uninstalling JRE version $oldVersion 64bit"
-     $64 = $checkoldreg64.PSChildName
+     $64 = $checkoldreg64.PSChileName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
 } catch {

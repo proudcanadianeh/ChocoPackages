@@ -1,12 +1,13 @@
 ﻿Write-Debug ("Starting " + $MyInvocation.MyCommand.Definition)
 
 $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
-# Import function to test if JRE in the same version is already installed
-Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
+
 
 [string]$packageName="Javaruntime"
-$version = '8.0.1710.11'
-$thisJreInstalledHash = thisJreInstalled($version)
+$version = '8.0.1810.13'
+#$thisJreInstalledHash = thisJreInstalled($version)
+  $checkreg64 = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
+  $checkreg32 = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
 
 <#
 Exit Codes:
@@ -15,16 +16,16 @@ Exit Codes:
     3010: A reboot is required to finish the install.
 #>
 
-if($thisJreInstalledHash[0]) 
+if($checkreg32 -ne $null) 
   {
      Write-Warning "Uninstalling JRE version $Version 32bit"
-     $32 = $thisJreInstalledHash[0].IdentifyingNumber
+     $32 = $checkreg32.PSChildName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$32" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
-  if($thisJreInstalledHash[1])
+  if($checkreg64 -ne $null)
   {
      Write-Warning "Uninstalling JRE version $Version 64bit"
-     $64 = $thisJreInstalledHash[1].IdentifyingNumber
+     $64 = $checkreg64.PSChildName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
 
