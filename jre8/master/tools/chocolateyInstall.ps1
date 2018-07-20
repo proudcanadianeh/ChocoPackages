@@ -112,7 +112,7 @@ $arguments = @{}
   if($checkoldreg64 -ne $null)
   {
      Write-Warning "Uninstalling JRE version $oldVersion 64bit"
-     $64 = $checkoldreg64.PSChileName
+     $64 = $checkoldreg64.PSChildName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
 } catch {
