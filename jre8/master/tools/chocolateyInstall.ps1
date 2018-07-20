@@ -37,18 +37,18 @@ $arguments = @{}
   }
 
   $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
-  # Import function to test if JRE in the same version is already installed
-  Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
+  # Import function to test if JRE in the same version is already installed. Legacy, phasing out. 
+  # Import-Module (Join-Path $scriptDir 'thisJreInstalled.ps1')
   
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=233170_512cd62ec5174c3487ac17c61aaa89e8'
-  $checksum32 = 'ECAA6BF5DC3C02D5F3A93382268D44B1540F322C508E88E679CA17F8DCC906D7'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=233172_512cd62ec5174c3487ac17c61aaa89e8'
-  $checksum64 = 'D5256B3D1A6DA959EA98EA2A2BE3A05A7DF9D1A5CD75DB3930F935AB71CE43B8'
-  $oldVersion = '8.0.1610.12'
-  $version = '8.0.1710.11'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=234472_96a7b8442fe848ef90c96a2fad6ed6d1'
+  $checksum32 = '9E5E6A1C5D26D93454751E65486F728233FDAC3B50FF763F6709FB87DD960CE5'
+  $url64 = 'http://javadl.oracle.com/webapps/download/AutoDL?BundleId=234474_96a7b8442fe848ef90c96a2fad6ed6d1'
+  $checksum64 = 'CD2F756133D59525869ACB605A54EFD132FCD7EAF53E2EC040D92EF40A2EA60A'
+  $oldVersion = '8.0.1710.11'
+  $version = '8.0.1810.13'
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
@@ -57,26 +57,16 @@ $arguments = @{}
   $osBitness = Get-ProcessorBits
    
   Write-Output "Searching if new version exists..."
-  $thisJreInstalledHash = thisJreInstalled($version)
+  $checkreg64 = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
+  $checkreg32 = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
 
-  # This is the code for both javaruntime and javaruntime-platformspecific packages.
-  # If the package is javaruntime-platformspecific, only install the jre version
-  # based on the OS bitness, otherwise install both 32- and 64-bit versions
-  if ($packageName -match 'platformspecific') {
+  #$thisJreInstalledHash = thisJreInstalled($version)
 
-    if (($thisJreInstalledHash[0]) -or ($thisJreInstalledHash[1])) {
-      Write-Output "Java Runtime Environment $version is already installed. Skipping download and installation to avoid 1603 errors."
-    } else {
-      Install-ChocolateyPackage $packageName $installerType $installArgs $url $url64
-    }
-
-  } else {
-    # Otherwise it is the javaruntime package which installs by default both 32- and 64-bit jre versions on 64-bit systems.
 
     # Checks if JRE 32/64-bit in the same version is already installed and if the user excluded 32-bit Java.
     # Otherwise it downloads and installs it.
     # This is to avoid unnecessary downloads and 1603 errors.
-    if ($thisJreInstalledHash[0]) 
+    if ($checkreg32 -ne $null) 
     {
       Write-Output "Java Runtime Environment $version (32-bit) is already installed. Skipping download and installation"
     } 
@@ -93,7 +83,7 @@ $arguments = @{}
 
     if ($osBitness -eq 64) 
     {
-      if ($thisJreInstalledHash[1]) 
+      if ($checkreg64 -ne $null) 
       {
         Write-Output "Java Runtime Environment $version (64-bit) is already installed. Skipping download and installation"
       } 
@@ -106,21 +96,23 @@ $arguments = @{}
         Write-Output "Java Runtime Environment $Version (64-bit) excluded for installation"
       }
     }
-  }
+  
   #Uninstalls the previous version of Java if either version exists
   Write-Output "Searching if the previous version exists..."
-  $oldJreInstalledHash = thisJreInstalled($oldVersion)
-
-  if($oldJreInstalledHash[0]) 
+  #$oldJreInstalledHash = thisJreInstalled($oldVersion)
+  $checkoldreg64 = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $oldversion} -ErrorAction SilentlyContinue
+  $checkoldreg32 = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $oldversion} -ErrorAction SilentlyContinue
+ 
+  if($checkoldreg32 -ne $null) 
   {
      Write-Warning "Uninstalling JRE version $oldVersion 32bit"
-     $32 = $oldJreInstalledHash[0].IdentifyingNumber
+     $32 = $checkoldreg32.PSChildName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$32" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
-  if($oldJreInstalledHash[1])
+  if($checkoldreg64 -ne $null)
   {
      Write-Warning "Uninstalling JRE version $oldVersion 64bit"
-     $64 = $oldJreInstalledHash[1].IdentifyingNumber
+     $64 = $checkoldreg64.PSChileName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
 } catch {
