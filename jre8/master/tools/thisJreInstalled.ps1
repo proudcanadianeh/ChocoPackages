@@ -1,4 +1,5 @@
-﻿# This function checks if the same version of JRE is already installed on the computer.
+﻿# NOTE - THIS SCRIPT IS NO LONGER IN USE AND WILL BE REMOVED IN A FUTURE VERSION
+# This function checks if the same version of JRE is already installed on the computer.
 # It returns a hash map with a 'x86_32' and 'x86_64'. These values are not empty if the
 # same version and bitness of JRE is already installed.
 function thisJreInstalled($version) {
