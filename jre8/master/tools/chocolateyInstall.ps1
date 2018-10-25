@@ -50,10 +50,19 @@ $arguments = @{}
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
-  $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
+  $installArgs = "/s /LV* $env:temp\jreMSI.log REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
+  $installArgs64 = "/s /LV* $env:temp\jreMSI.log REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
   $osBitness = Get-ProcessorBits
-   
+
+  #This checks to see if an alternative cache location has been set for the downloads
+  $chococache = choco config get cachelocation -r
+  if ($chococache){
+  $cachepath = "$env:temp\$packageName\$version"
+  }else{
+  $cachepath = "$env:temp\chocolatey\$packagename\$version"
+  }
+  
+  #This checks to see if current version is already installed
   Write-Output "Checking to see if local install is already up to date..."
   try{
   $checkreg64 = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
@@ -72,9 +81,10 @@ $arguments = @{}
     elseif ($exclude -ne "32") 
     {
       Write-Output "Downloading 32-bit installer"
-      Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$env:temp\chocolatey\$packagename\$version\JRE8x86.exe" -url $url -checksum $checksum32 -checksumType 'SHA256'
+      Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$cachepath\JRE8x86.exe" -url $url -checksum $checksum32 -checksumType 'SHA256'
       Write-Output "Installing JRE $version 32-bit"
-      Install-ChocolateyPackage $packageName $installerType $installArgs -url "$env:temp\chocolatey\$packagename\$version\JRE8x86.exe" -checksum $checksum32 -checksumtype 'sha256'
+      Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs -file "$cachepath\JRE8x86.exe"
+      #Install-ChocolateyPackage $packageName $installerType $installArgs -url "$env:temp\chocolatey\$packagename\$version\JRE8x86.exe" -checksum $checksum32 -checksumtype 'sha256'
     } 
     else 
     {
@@ -92,9 +102,11 @@ $arguments = @{}
       elseif ($exclude -ne "64") 
       {
         Write-Output "Downloading 64-bit isntaller"
-        Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$env:temp\chocolatey\$packagename\$version\JRE8x64.exe" -url64 $url64 -checksum64 $checksum64 -checksumType 'SHA256'
+        Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$cachepath\JRE8x64.exe" -url64 $url64 -checksum64 $checksum64 -checksumType 'SHA256'
         Write-Output "Installing JRE $version 64-bit"
-        Install-ChocolateyPackage $packageName $installerType $installArgs64 -url64bit "$env:temp\chocolatey\$packagename\$version\JRE8x64.exe" -checksum64 $checksum64 -checksumtype64 'sha256'
+        Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs -file64 "$cachepath\JRE8x64.exe"
+
+       # Install-ChocolateyPackage $packageName $installerType $installArgs64 -url64bit "$env:temp\chocolatey\$packagename\$version\JRE8x64.exe" -checksum64 $checksum64 -checksumtype64 'sha256'
       } 
       else 
       {
