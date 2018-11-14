@@ -50,17 +50,11 @@ $arguments = @{}
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s /LV* $env:temp\jreMSI.log REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
-  $installArgs64 = "/s /LV* $env:temp\jreMSI.log REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
+  $installArgs = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
+  $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
   $osBitness = Get-ProcessorBits
-
-  #This checks to see if an alternative cache location has been set for the downloads
-  $chococache = choco config get cachelocation -r
-  if ($chococache){
-  $cachepath = "$env:temp\$packageName\$version"
-  }else{
-  $cachepath = "$env:temp\chocolatey\$packagename\$version"
-  }
+  $cachepath = "$env:temp\$packagename\$version"
+  
   
   #This checks to see if current version is already installed
   Write-Output "Checking to see if local install is already up to date..."
