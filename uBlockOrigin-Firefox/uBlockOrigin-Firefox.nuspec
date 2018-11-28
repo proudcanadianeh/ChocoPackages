@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>uBlockOrigin-firefox</id>
+    <version>1.17.2</version>
+    <title>uBlock Origin for Firefox</title>
+    <authors>Raymond Hill</authors>
+    <licenseUrl>https://github.com/gorhill/uBlock/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/gorhill/uBlock</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/gorhill/uBlock/master/doc/img/icon38@2x.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>uBlock Origin is a free and open-source, cross-platform browser extension for content-filtering, including ad-blocking. The extension is available for several browsers: Safari (beta), Chrome, Chromium, Edge, Firefox, and Opera. uBlock Origin has received praise from technology websites, and is reported to be much less memory-intensive than other extensions with similar functionality. uBlock Origin's stated purpose is to give users the means to enforce their own (content-filtering) choices</description>
+    <tags>Firefox ads blocking</tags>   
+    <releaseNotes>https://github.com/gorhill/uBlock/releases</releaseNotes>
+    <summary>uBlockOrigin extension for Firefox</summary>
+        <dependencies>
+      <dependency id="firefox" />
+    </dependencies>
+  </metadata>
+</package>
