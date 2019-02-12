@@ -95,7 +95,7 @@ $arguments = @{}
       } 
       elseif ($exclude -ne "64") 
       {
-        Write-Output "Downloading 64-bit isntaller"
+        Write-Output "Downloading 64-bit installer"
         Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$cachepath\JRE8x64.exe" -url64 $url64 -checksum64 $checksum64 -checksumType 'SHA256'
         Write-Output "Installing JRE $version 64-bit"
         Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs -file64 "$cachepath\JRE8x64.exe"
