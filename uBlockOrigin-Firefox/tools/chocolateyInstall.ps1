@@ -1,7 +1,7 @@
 #This packaged based off one creatd by Doc for the adblockplus install. Thanks Doc!
 
 $packageName = 'ublockorigin-firefox'
-$url = 'https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-1.17.2-an+fx.xpi?filehash=sha256%3Ab5e2fb5f12ef64d9ff4b8723af5f8d16ee349c5b9f2683edafc440f587efd078'
+$url = 'https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-1.18.2-an+fx.xpi?filehash=sha256%3Ae16599bd915ffa6827c5cff8cb22037b13f5a2ff534ead1e50d4e283d526b784'
 $extensionName = "uBlock0@raymondhill.net.xpi" #Filename based off extension ID
 
 
@@ -9,10 +9,11 @@ $extensionName = "uBlock0@raymondhill.net.xpi" #Filename based off extension ID
 if(test-path 'hklm:\SOFTWARE\Mozilla\Firefox\TaskBarIDs'){
 	$installDir = Get-Item -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Firefox\TaskBarIDs | Select-Object -ExpandProperty Property
     echo "Install Path located via Registry"
-}
-if(test-path 'hklm:\SOFTWARE\Wow6432Node\Mozilla\Firefox\TaskBarIDs'){
+}elseif(test-path 'hklm:\SOFTWARE\Wow6432Node\Mozilla\Firefox\TaskBarIDs'){
 	$installDir = Get-Item -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Mozilla\Firefox\TaskBarIDs | Select-Object -ExpandProperty Property
     echo "Install path found via Wow6432Node in the registry"
+}else{
+throw "Firefox install not detected"
 }
 
 #Generate path for copy

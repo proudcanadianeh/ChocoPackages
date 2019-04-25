@@ -41,12 +41,12 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=235725_2787e4a523244c269598db4e85c51e0c'
-  $checksum32 = 'DE27BD5A46F325E7F7874538F5CA7FBE77D25ABA9D1B3ED9B93E0A81E4EAFE35'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=235727_2787e4a523244c269598db4e85c51e0c'
-  $checksum64 = '605D05442C1640530A8CA2938BAAFB785560AEFA88DC8CD0B43261EF3ECFA4BD'
-  $oldVersion = '8.0.1810.13'
-  $version = '8.0.1910.12'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=238727_478a62b7d4e34b78b671c754eaaf38ab'
+  $checksum32 = '47DE97325B8EA90EA9F93E1595CC7F843DA0C9C6E4C9532ABEA3A194CFB621D9'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=238729_478a62b7d4e34b78b671c754eaaf38ab'
+  $checksum64 = 'C18CF8F2776B69DC838440AADFAAE36F50717636F38EEC5F1E4A27A8CB4F20FB'
+  $oldVersion = '8.0.2010.9'
+  $version = '8.0.2110.12'
   #--------------------------------------------------------------------------
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
@@ -54,8 +54,7 @@ $arguments = @{}
   $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
   $osBitness = Get-ProcessorBits
   $cachepath = "$env:temp\$packagename\$version"
-  
-  
+  Write-Host "The software license has changed for Java and this software must be licensed for general business use. Please ensure your licensing is compliant before installing." -ForegroundColor white -BackgroundColor red
   #This checks to see if current version is already installed
   Write-Output "Checking to see if local install is already up to date..."
   try{
