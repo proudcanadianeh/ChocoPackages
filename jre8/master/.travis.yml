@@ -1,4 +1,0 @@
-os: windows
-language: bash    # language: java is not yet supported on Travis CI Windows
-install: choco install jre8    # fails :-(
-script: true
