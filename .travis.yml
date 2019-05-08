@@ -1,4 +1,8 @@
 os: windows
 language: bash    # language: java is not yet supported on Travis CI Windows
-install: choco install jre8    # fails :-(
+matrix:
+  include:
+    - install: choco install jre8
+    - install: choco install jre8 /exclude:32
+    - install: choco install jre8 /exclude:64
 script: true
