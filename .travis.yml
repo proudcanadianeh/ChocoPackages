@@ -1,3 +1,4 @@
+# https://docs.travis-ci.com/user/reference/windows/
 os: windows
 language: bash    # language: java is not yet supported on Travis CI Windows
 matrix:
@@ -6,6 +7,7 @@ matrix:
     - install: choco install jre8 /exclude:32
     - install: choco install jre8 /exclude:64
     - install: choco install jre8 --version 8.0.181
-    - install: choco install jre8 /exclude:32 --version 8.0.181
-    - install: choco install jre8 /exclude:64 --version 8.0.181
+    - install:
+        - powershell
+        - choco install jre8
 script: true
