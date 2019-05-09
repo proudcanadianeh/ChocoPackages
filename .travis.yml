@@ -1,39 +1,9 @@
 # https://docs.travis-ci.com/user/reference/windows/
 os: windows
 language: bash  # language: java is not yet supported on Travis CI Windows
-matrix:
-  include:
-    #- install: choco install jre8
-    #- install: choco install jre8 /exclude:32
-    #- install: choco install jre8 /exclude:64
-    #- install: choco install jre8 --version 8.0.181
-    #- install: powershell choco install jre8
-    - install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log, etc.
-      before_script:
-        #- cat /c/jre8_msi_install.log || true  # No such file or directory
-        #- cat /c/Users/travis/jre8_msi_install.log || true  # No such file or directory
-        #- cat /c/Users/travis/AppData/Local/Temp/chocolatey/cmake.install.3.12.3.MsiInstall.log || true  # No such file or directory
-        #- grep nstall.log /c/ProgramData/chocolatey/logs/chocolatey.log || true
-        #- grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
-        #- grep "\.LOG" /c/ProgramData/chocolatey/logs/chocolatey.log || true
-        #- grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
-        # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI*.LOG || true
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log || true  # Build process for JRE8x86.exe
-script:
-  #- dir "*jre*.log /s" || true
-  - dir /c/Users/travis/AppData/Local/Temp/chocolatey || true
-  #- dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre || true
-  #- dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre8 || true
-  - dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre8/8.0.2110.12/JRE8x86.exe || true
-  #- dir "*jre* /s" || true  # search $HOME and all subdirectories
-  #- dir "*jre*.* /s" || true  # search $HOME and all subdirectories
-  #- dir "/c/*jre*.* /s" || true  # search C:\ and all subdirectories
-  #- dir "C:\*jre*.* /s" || true  # search C:\ and all subdirectories
-  #- dir "C:\\*jre*.* /s" || true  # search C:\ and all subdirectories
-  - where java || true
-  - java -version || true  # java: command not found
-  - java.exe -version || true  # java.exe: command not found
-  - ./java.exe -version || true  # ./java.exe: command not found
-  - ./java.exe -XshowSettings:properties -version || true
-  - /c/Users/travis/AppData/Local/Temp/chocolatey/jre8/8.0.2110.12/JRE8x86.exe -version || true
+install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log, etc.
+before_script:
+  - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI*.LOG || true
+  - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log || true
+  # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
+script: java -version || true  # java: command not found
