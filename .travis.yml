@@ -1,13 +1,17 @@
 # https://docs.travis-ci.com/user/reference/windows/
 os: windows
-language: bash    # language: java is not yet supported on Travis CI Windows
+language: bash  # language: java is not yet supported on Travis CI Windows
 matrix:
   include:
     - install: choco install jre8
     - install: choco install jre8 /exclude:32
     - install: choco install jre8 /exclude:64
     - install: choco install jre8 --version 8.0.181
-    - install:
-        - powershell
-        - choco install jre8
-script: true
+    - install: powershell choco install jre8
+    - install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log
+      before_script:
+        - cat /c/jre8_msi_install.log || true  # Does not exist
+        - grep \.log /c/ProgramData/chocolatey/logs/chocolatey.log || true
+        - grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
+        # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
+script: java -version || true
