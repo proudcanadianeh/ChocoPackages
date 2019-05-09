@@ -19,8 +19,9 @@ matrix:
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
 script:
   - dir *jre8*.log /s || true
-  - dir *jre8*.* \s || true
-  - dir *jre8*.* \\s || true
+  - dir "*jre8*.* /s" || true
+  - dir *jre8*.* "/s" || true
+  - dir *jre8*.* \\/s || true
   - dir *jre8*.* \/s || true
   - dir *jre8*.* /s || true
   - dir *jre8*.* //s || true
