@@ -11,6 +11,8 @@ matrix:
     - install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log
       before_script:
         - cat /c/jre8_msi_install.log || true  # Does not exist
+        - cat /c/Users/travis/jre8_msi_install.log || true  # Does not exist
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/cmake.install.3.12.3.MsiInstall.log || true
         - grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
         - grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
