@@ -18,14 +18,11 @@ matrix:
         - grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
 script:
-  - dir *jre8*.log /s || true
-  - dir "*jre8*.* /s" || true
-  - dir *jre8*.* "/s" || true
-  - dir *jre8*.* \\/s || true
-  - dir *jre8*.* \/s || true
-  - dir *jre8*.* /s || true
-  - dir *jre8*.* //s || true
-  - dir /c/*jre8*.* || true
+  #- dir "*jre8*.log /s" || true
+  - dir "*jre8*.* /s" || true  # search $HOME and all subdirectories
+  - dir "/c/*jre8*.* /s" || true  # search C:\ and all subdirectories
+  - dir "C:\*jre8*.* /s" || true  # search C:\ and all subdirectories
+  - dir "C:\\*jre8*.* /s" || true  # search C:\ and all subdirectories
   - where java || true
   - java -version || true  # java: command not found
   - java.exe -version || true  # java.exe: command not found
