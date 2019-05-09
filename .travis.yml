@@ -17,4 +17,9 @@ matrix:
         - grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
         - grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
-script: java.exe -version || true  # java: command not found
+script:
+  - where java || true
+  - java -version || true  # java: command not found
+  - java.exe -version || true  # java.exe: command not found
+  - ./java.exe -version || true  # ./java.exe: command not found
+  - ./java.exe -XshowSettings:properties -version || true
