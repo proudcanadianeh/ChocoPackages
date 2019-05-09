@@ -8,12 +8,13 @@ matrix:
     - install: choco install jre8 /exclude:64
     - install: choco install jre8 --version 8.0.181
     - install: powershell choco install jre8
-    - install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log
+    - install: choco install jre8 || true  # ignore the error so we can examine chocolatey.log, etc.
       before_script:
-        - cat /c/jre8_msi_install.log || true  # Does not exist
-        - cat /c/Users/travis/jre8_msi_install.log || true  # Does not exist
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/cmake.install.3.12.3.MsiInstall.log || true
+        - cat /c/jre8_msi_install.log || true  # No such file or directory
+        - cat /c/Users/travis/jre8_msi_install.log || true  # No such file or directory
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/cmake.install.3.12.3.MsiInstall.log || true  # No such file or directory
+        - grep nstall.log /c/ProgramData/chocolatey/logs/chocolatey.log || true
         - grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
         - grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
-script: java -version || true
+script: java.exe -version || true  # java: command not found
