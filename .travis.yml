@@ -17,8 +17,8 @@ matrix:
         #- grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
         #- grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI13d62.LOG
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI13d62.LOG || true
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log || true
 script:
   #- dir "*jre*.log /s" || true
   - dir /c/Users/travis/AppData/Local/Temp/chocolatey || true
