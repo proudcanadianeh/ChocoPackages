@@ -19,6 +19,7 @@ matrix:
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
 script:
   #- dir "*jre8*.log /s" || true
+  - dir /c/Users/travis/AppData/Local/Temp/chocolatey || true
   - dir "*jre8*.* /s" || true  # search $HOME and all subdirectories
   - dir "/c/*jre8*.* /s" || true  # search C:\ and all subdirectories
   - dir "C:\*jre8*.* /s" || true  # search C:\ and all subdirectories
