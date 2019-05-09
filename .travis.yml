@@ -17,14 +17,14 @@ matrix:
         #- grep "\.log" /c/ProgramData/chocolatey/logs/chocolatey.log || true
         #- grep jre8 /c/ProgramData/chocolatey/logs/chocolatey.log || true
         # - cat /c/ProgramData/chocolatey/logs/chocolatey.log || true  # too long for Travis CI
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI13d62.LOG || true
-        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log || true
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/MSI*.LOG || true
+        - cat /c/Users/travis/AppData/Local/Temp/chocolatey/jusched.log || true  # Build process for JRE8x86.exe
 script:
   #- dir "*jre*.log /s" || true
   - dir /c/Users/travis/AppData/Local/Temp/chocolatey || true
   #- dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre || true
   #- dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre8 || true
-  - dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre8/8.0.2110.12 || true
+  - dir /c/Users/travis/AppData/Local/Temp/chocolatey/jre8/8.0.2110.12/JRE8x86.exe || true
   #- dir "*jre*.* /s" || true  # search $HOME and all subdirectories
   #- dir "/c/*jre*.* /s" || true  # search C:\ and all subdirectories
   #- dir "C:\*jre*.* /s" || true  # search C:\ and all subdirectories
@@ -34,3 +34,4 @@ script:
   - java.exe -version || true  # java.exe: command not found
   - ./java.exe -version || true  # ./java.exe: command not found
   - ./java.exe -XshowSettings:properties -version || true
+  - /c/Users/travis/AppData/Local/Temp/chocolatey/jre8/8.0.2110.12/JRE8x86.exe -version
