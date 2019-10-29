@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>javaruntime</id>
-    <version>8.0.191</version>
+    <version>8.0.231</version>
     <title>Java Runtime (JRE)</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
@@ -19,7 +19,7 @@ This is just a metapackage for the latest JRE (currenly JRE 8). Have a look at t
     <releaseNotes />
     <tags>java runtime environment</tags>
     <dependencies>
-      <dependency id="jre8" version="8.0.191" />
+      <dependency id="jre8" version="8.0.231" />
     </dependencies>
   </metadata>
 </package>
