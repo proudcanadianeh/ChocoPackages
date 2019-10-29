@@ -4,7 +4,7 @@
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>3cx</id>
-    <version>15.5</version>
+    <version>16.0</version>
     <packageSourceUrl>https://github.com/proudcanadianeh/ChocoPackages/tree/master/3cx</packageSourceUrl>
    
     <owners>Myself</owners>

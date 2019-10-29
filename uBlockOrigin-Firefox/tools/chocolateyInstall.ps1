@@ -1,7 +1,7 @@
 #This packaged based off one creatd by Doc for the adblockplus install. Thanks Doc!
 
 $packageName = 'ublockorigin-firefox'
-$url = 'https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-1.18.2-an+fx.xpi?filehash=sha256%3Ae16599bd915ffa6827c5cff8cb22037b13f5a2ff534ead1e50d4e283d526b784'
+$url = 'https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-1.20.2-an+fx.xpi?filehash=sha256%3A4634411118e2598f91dbb07289b11109e097660d64391cd04eceb205d2c50854'
 $extensionName = "uBlock0@raymondhill.net.xpi" #Filename based off extension ID
 
 
