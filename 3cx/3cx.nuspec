@@ -1,46 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>3cx</id>
-    <version>15.5</version>
-    <packageSourceUrl>https://github.com/proudcanadianeh/ChocoPackages/tree/master/3cx</packageSourceUrl>
-   
-    <owners>Myself</owners>
-    <!-- ============================== -->
-
-    <!-- == SOFTWARE SPECIFIC SECTION == -->
-    <!-- This section is about the software itself -->
+    <version>16.3.0</version>
+    <packageSourceUrl>https://github.com/basictheprogram/chocolatey/3cx</packageSourceUrl>
+    <owners>basictheprogram</owners>
     <title>3CX Client for Windows</title>
     <authors>3CX</authors>
-    <!-- projectUrl is required for the community feed -->
     <projectUrl>https://www.3cx.com/phone-system/3cxphone/</projectUrl>
-    <iconUrl>https://d1ihx0ymjgeqr0.cloudfront.net/wp-content/themes/MDM/images/logo.png</iconUrl>
-    <!-- <copyright>Year Software Vendor</copyright> -->
-    <!-- If there is a license Url available, it is required for the community feed -->
-    <!-- <licenseUrl>Software License Location __REMOVE_OR_FILL_OUT__</licenseUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>-->
-    <!--<projectSourceUrl>Software Source Location - is the software FOSS somewhere? Link to it with this</projectSourceUrl>-->
-    <docsUrl>https://www.3cx.com/phone-system/windows-mac-softphone/</docsUrl>
-    <tags>3cx</tags>
-    <summary>3CX Windows Client</summary>
-    <description>The Windows installer for the 3CX Client. I would recommend avoiding installing on the actual 3CX server.</description>
-    <!-- <releaseNotes>__REPLACE_OR_REMOVE__MarkDown_Okay</releaseNotes> -->
-    <!-- =============================== -->      
-
-    <!-- Specifying dependencies and version ranges? https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files -->
+    <iconUrl>https://basictheprogram.github.io/chocolatey-3cx/icons/3cx-logo.png</iconUrl>
+    <copyright>Year Software Vendor</copyright>
+    <licenseUrl>https://www.3cx.com/company/eula/</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://www.3cx.com/phone-system/3cxphone/</projectSourceUrl>
+    <docsUrl>https://www.3cx.com/docs/manual/</docsUrl>
+    <tags>3CX VoIP UC</tags>
+    <summary>3CX Windows VoIP Phone For VoIP Providers</summary>
+    <description>The 3CX VoIP Phone is a free softphone app available for Windows. Connect the app 
+      to a VoIP Provider to make calls to any mobile or landline number, just as you would from 
+      your desk phone. Installing the 3CX VoIP Phone is easy and only takes a few minutes. There 
+      is no licensing fee and you are not tied to a particular VoIP provider. The user interface 
+      is simple and easy to use.
+      
+      Features
+        Available for Windows
+        Ability to choose several popular phone interfaces
+        Automatically provision the settings
+        Blind Transfers
+        Record calls
+        Shows personal call log / history
+        Supports G.711, GSM and Speex codecs
+        Supports standard USB and JABRA headsets (Windows)
+        Works with popular VoIP Providers
+    </description>
+    <releaseNotes>https://www.3cx.com/blog/change-log/phone-system-change-log/</releaseNotes> 
    <dependencies>
       <dependency id="vcredist2010"/>
     </dependencies>
-    <!-- chocolatey-core.extension - https://chocolatey.org/packages/chocolatey-core.extension
-         - You want to use Get-UninstallRegistryKey on less than 0.9.10 (in chocolateyUninstall.ps1)
-         - You want to use Get-PackageParameters and on less than 0.11.0
-         - You want to take advantage of other functions in the core community maintainer's team extension package
-    -->
   </metadata>
   <files>
-    <!-- this section controls what actually gets packaged into the Chocolatey package -->
     <file src="tools\**" target="tools" />
   </files>
 </package>
