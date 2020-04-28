@@ -8,7 +8,7 @@
     <title>3CX Client for Windows</title>
     <authors>3CX</authors>
     <projectUrl>https://www.3cx.com/phone-system/3cxphone/</projectUrl>
-    <iconUrl>https://basictheprogram.github.io/chocolatey-3cx/icons/3cx-logo.png</iconUrl>
+    <iconUrl>https://basictheprogram.github.io/ChocoPackages/3cx/icons/3cx-logo.png</iconUrl>
     <copyright>Year Software Vendor</copyright>
     <licenseUrl>https://www.3cx.com/company/eula/</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
