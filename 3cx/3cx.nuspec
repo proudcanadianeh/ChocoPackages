@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>3cx</id>
-    <version>16.3.0</version>
+    <version>16.3.0.111</version>
     <packageSourceUrl>https://github.com/basictheprogram/chocolatey/3cx</packageSourceUrl>
     <owners>basictheprogram</owners>
     <title>3CX Client for Windows</title>

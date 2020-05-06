@@ -1,8 +1,8 @@
-﻿ErrorActionPreference = 'Stop'; # stop on all errors
+﻿$ErrorActionPreference = 'Stop'; # stop on all errors
 
 $packageArgs = @{
   packageName    = $env:ChocolateyPackageName
-  softwareName   = '3CXPhone*'
+  softwareName   = '3CX*'
   fileType       = 'MSI' 
   silentArgs     = "/qn /norestart"
   validExitCodes = @(0, 3010, 1605, 1614, 1641) 
