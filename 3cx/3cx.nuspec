@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>3cx</id>
-    <version>16.3.0.111</version>
+    <version>16.3.0.144</version>
     <packageSourceUrl>https://github.com/basictheprogram/chocolatey/3cx</packageSourceUrl>
     <owners>basictheprogram</owners>
     <title>3CX Client for Windows</title>
     <authors>3CX</authors>
     <projectUrl>https://www.3cx.com/phone-system/3cxphone/</projectUrl>
     <iconUrl>https://basictheprogram.github.io/ChocoPackages/3cx/icons/3cx-logo.png</iconUrl>
-    <copyright>Year Software Vendor</copyright>
+    <copyright>© 2020 3CX</copyright>
     <licenseUrl>https://www.3cx.com/company/eula/</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <projectSourceUrl>https://www.3cx.com/phone-system/3cxphone/</projectSourceUrl>
