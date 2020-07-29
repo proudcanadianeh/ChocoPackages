@@ -31,6 +31,14 @@ $arguments = @{}
           Write-Host "exclude Argument Found"
           $exclude = $arguments["exclude"]
       }
+      if($arguments.ContainsKey("64dir")) {
+          Write-Host "64Dir Argument Found"
+          $64dir = $arguments["64dir"]
+      }
+      if($arguments.ContainsKey("32dir")) {
+          Write-Host "32Dir Argument Found"
+          $32dir = $arguments["32dir"]
+      }
 
   } else {
       Write-Debug "No Package Parameters Passed in"
@@ -41,17 +49,20 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241534_1f5b5a70bf22433b84d0e960903adac8'
-  $checksum32 = 'F6803573FB3EB1BBE4AA17EBD587E1AFFDB33C8F6CA3FFDBBA54BCCBD407346C'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241536_1f5b5a70bf22433b84d0e960903adac8'
-  $checksum64 = '9AA43FDF8F12CB4D49FA8CB2F469916A7A761429194968668FCDCF2A375D9797'
-  $oldVersion = '8.0.2310.11'
-  $version = '8.0.2410.7'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242988_a4634525489241b9a9e1aa73d9e118e6'
+  $checksum32 = '9B7A8B449054164890D96FD25662CD2CD606B4B71032D435BD878589425E6F7F'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6'
+  $checksum64 = '3F3B8ECBB0808B15A811CA437767D09E73C04D465729FD1532E296903634461C'
+  $oldVersion = '8.0.2510.8'
+  $version = '8.0.2610.12'
   #--------------------------------------------------------------------------
+
+  if ($64dir) { $64dir = "INSTALLDIR=`"$64dir`""; echo "64 dir detected at $64dir";}
+  if ($32dir) { $32dir = "INSTALLDIR=`"$32dir`""; echo "32 dir detected at $32dir";}
   $homepath = $version -replace "(\d+\.\d+)\.(\d\d)(.*)",'jre1.$1_$2'
   $installerType = 'exe'
-  $installArgs = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $32dir"
-  $installArgs64 = "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0 $64dir"
+  $installArgs = "/s $32dir REBOOT=0 SPONSORS=0 AUTO_UPDATE=0"
+  $installArgs64 = "/s $64dir REBOOT=0 SPONSORS=0 AUTO_UPDATE=0"
   $osBitness = Get-ProcessorBits
   $cachepath = "$env:temp\$packagename\$version"
   Write-Host "The software license has changed for Java and this software must be licensed for general business use. Please ensure your licensing is compliant before installing." -ForegroundColor white -BackgroundColor red
@@ -77,7 +88,6 @@ $arguments = @{}
       Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$cachepath\JRE8x86.exe" -url $url -checksum $checksum32 -checksumType 'SHA256'
       Write-Output "Installing JRE $version 32-bit"
       Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs -file "$cachepath\JRE8x86.exe"
-      #Install-ChocolateyPackage $packageName $installerType $installArgs -url "$env:temp\chocolatey\$packagename\$version\JRE8x86.exe" -checksum $checksum32 -checksumtype 'sha256'
     } 
     else 
     {
@@ -124,6 +134,8 @@ $arguments = @{}
      $64 = $checkoldreg64.PSChildName
      Start-ChocolateyProcessAsAdmin "/qn /norestart /X$64" -exeToRun "msiexec.exe" -validExitCodes @(0,1605,3010)
   }
+  $64dir = $null
+  $32dir = $null
 } catch {
   #Write-ChocolateyFailure $packageName $($_.Exception.Message)
   throw
