@@ -49,12 +49,12 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242988_a4634525489241b9a9e1aa73d9e118e6'
-  $checksum32 = '9B7A8B449054164890D96FD25662CD2CD606B4B71032D435BD878589425E6F7F'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6'
-  $checksum64 = '3F3B8ECBB0808B15A811CA437767D09E73C04D465729FD1532E296903634461C'
-  $oldVersion = '8.0.2510.8'
-  $version = '8.0.2610.12'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=243735_61ae65e088624f5aaa0b1d2d801acb16'
+  $checksum32 = '5B3F733A2BAD8B359117A47014D309A69DC7F1F6D2E3DBDC4CB560F2E4F02D62'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=243737_61ae65e088624f5aaa0b1d2d801acb16'
+  $checksum64 = '6210A4CDFC5C67D34027224DFADF48798BF3508E5DB6EF268BB93F0FB7D697D5'
+  $oldVersion = '8.0.2610.12'
+  $version = '8.0.2710.9'
   #--------------------------------------------------------------------------
 
   if ($64dir) { $64dir = "INSTALLDIR=`"$64dir`""; echo "64 dir detected at $64dir";}
@@ -107,7 +107,7 @@ $arguments = @{}
         Write-Output "Downloading 64-bit installer"
         Get-ChocolateyWebFile -packageName $packageName -fileFullPath "$cachepath\JRE8x64.exe" -url64 $url64 -checksum64 $checksum64 -checksumType 'SHA256'
         Write-Output "Installing JRE $version 64-bit"
-        Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs -file64 "$cachepath\JRE8x64.exe"
+        Install-ChocolateyInstallPackage -packageName JRE8 -fileType $installerType -silentArgs $installArgs64 -file64 "$cachepath\JRE8x64.exe"
 
        # Install-ChocolateyPackage $packageName $installerType $installArgs64 -url64bit "$env:temp\chocolatey\$packagename\$version\JRE8x64.exe" -checksum64 $checksum64 -checksumtype64 'sha256'
       } 
