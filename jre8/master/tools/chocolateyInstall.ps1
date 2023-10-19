@@ -49,12 +49,12 @@ $arguments = @{}
   $packageName = 'jre8'
   # Modify these values -----------------------------------------------------
   # Find download URLs at http://www.java.com/en/download/manual.jsp
-  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248772_8c876547113c4e4aab3c868e9e0ec572'
-  $checksum32 = '77C0DCA353C31C8DAEDA83E2C59E417E637EBA2658B079054588D3DEA69F4AE8'
-  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248774_8c876547113c4e4aab3c868e9e0ec572'
-  $checksum64 = '20AA7E122065F92B09EC595799CCFCBCBAA554CD7EDACAACBFB3A55CA3830890'
-  $oldVersion = '8.0.3710.11'
-  $version = '8.0.3810.9'
+  $url = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249201_b291ca3e0c8548b5a51d5a5f50063037'
+  $checksum32 = 'CFE673205CCCA784C28FD9A5F767243FC9E441814F3D67D18084B8316C10A431'
+  $url64 = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249203_b291ca3e0c8548b5a51d5a5f50063037'
+  $checksum64 = 'A7F72136D77AF4947DE1CE4660D79EAE29A9782CC965DD0FD2D9DAB87716EA67'
+  $oldVersion = '8.0.3810.9'
+  $version = '8.0.3910.13'
   #--------------------------------------------------------------------------
 
   if ($64dir) { $64dir = "INSTALLDIR=`"$64dir`""; echo "64 dir detected at $64dir";}
