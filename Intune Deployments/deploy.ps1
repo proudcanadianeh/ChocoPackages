@@ -7,22 +7,24 @@ This script checks if a specified Chocolatey package is installed. If it is, the
 If it's not, the script installs the package if the DeploymentType is "Install". If the DeploymentType is "Uninstall", the script uninstalls the package. 
 The script also supports specifying a version for the package to be installed or uninstalled.
 
-.PARAMETER packageName
-The name of the package to install, upgrade, or uninstall.
-
 .PARAMETER DeploymentType
 The type of deployment to perform. Valid values are "Install" and "Uninstall".
+
+.PARAMETER packageName
+The name of the package to install, upgrade, or uninstall.
 
 .PARAMETER Version
 (Optional) The version of the package to install or uninstall. If not specified, the latest version will be installed or any version will be uninstalled.
 
 .EXAMPLE
+.\deploy.ps1 install git
 .\deploy.ps1 -packageName git -DeploymentType Install
-This example installs or upgrades the git package.
+Either example installs or upgrades the git package.
 
 .EXAMPLE
+.\deploy.ps1 uninstall git
 .\deploy.ps1 -packageName git -DeploymentType Uninstall
-This example uninstalls the git package.
+Either example uninstalls the git package.
 
 .EXAMPLE
 .\deploy.ps1 -packageName git -DeploymentType Install -Version 2.32.0
@@ -37,12 +39,13 @@ The script exits with a status of 1 if the Chocolatey command fails, and 0 other
 #>
 
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$packageName,
 
     [Parameter(Mandatory=$true)]
     [ValidateSet("Install","Uninstall")]
     [string]$DeploymentType,
+
+    [Parameter(Mandatory=$true)]
+    [string]$packageName,
 
     [string]$Version
 )
@@ -76,16 +79,16 @@ if ($DeploymentType -eq "Install") {
     $packageExists = choco list | Select-String $packageName
     if ($packageExists) {
         if ($Version) {
-            choco upgrade $packageName -y --version=$Version
+            choco upgrade $packageName -y --version=$Version --no-progress
         } else {
-            choco upgrade $packageName -y
+            choco upgrade $packageName -y --no-progress
         }
     } else {
         # package doesn't exist, install it
         if ($Version) {
-            choco install $packageName -y --version=$Version
+            choco install $packageName -y --version=$Version --no-progress
         } else {
-            choco install $packageName -y
+            choco install $packageName -y --no-progress
         }
     }
 }
@@ -96,9 +99,9 @@ if ($DeploymentType -eq "Uninstall") {
     $packageExists = choco list | Select-String $packageName
     if ($packageExists) {
         if ($Version) {
-            choco uninstall $packageName -y --version=$Version
+            choco uninstall $packageName -y -x --version=$Version
         } else {
-            choco uninstall $packageName -y
+            choco uninstall $packageName -y -x
         }
     } else {
         Write-EventLog -LogName Application -Source "CustomScript" -EntryType Information -EventId 1001 -Message "Choco list could not identify $packageName. Nothing to uninstall. Exiting."
