@@ -4,11 +4,9 @@ $scriptDir = $(Split-Path -parent $MyInvocation.MyCommand.Definition)
 
 
 [string]$packageName="JRE8"
-<<<<<<< Updated upstream
-$version = '8.0.3910.13'
-=======
+
 $version = '8.0.4010.10'
->>>>>>> Stashed changes
+
 #$thisJreInstalledHash = thisJreInstalled($version)
   $checkreg64 = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue
   $checkreg32 = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, PSChildName | Where-Object { $_.DisplayName -like '*Java 8*' -and ([Version]$_.DisplayVersion) -eq $version} -ErrorAction SilentlyContinue

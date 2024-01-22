@@ -2,11 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>jre8</id>
-<<<<<<< Updated upstream
-    <version>8.0.391</version>
-=======
     <version>8.0.401</version>
->>>>>>> Stashed changes
     <title>Java SE Runtime Environment</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
