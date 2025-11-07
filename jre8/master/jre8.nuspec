@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>jre8</id>
-    <version>8.0.441</version>
+    <version>8.0.471</version>
     <title>Java SE Runtime Environment</title>
     <authors>Oracle</authors>
     <owners>Oracle</owners>
